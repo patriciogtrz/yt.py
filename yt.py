@@ -1,28 +1,33 @@
-from pytube import YouTube
+#!/bin/env python3 python
+
+from pytubefix import YouTube
+from pytubefix.cli import on_progress
 import os
 
-#Getting the Desktop path
-path = os.path.join(os.path.join(os.environ["USERPROFILE"]), "Desktop")
+def main():
 
-#Getting the URL
-yt = YouTube(input("Please enter a URL: ")).streams
+    #Getting the path
+    path = input("\nEnter download path: \n")
+    if not os.path.exists(path):
+        os.makedirs(path)
 
-#Audio or video?
-answer = input("Would you like to download video (1) or audio-only (2)?: ")
+    #Getting the video link
+    url = input("\nEnter video url:\n")
+    yt = YouTube(url, on_progress_callback=on_progress)
+    video_title = yt.title
+    print("\nThe video title is: " + video_title + ".\n")
 
-def vo():
-	
-	#Filters and download
-	yt.filter(progressive = True).order_by("resolution").desc().first().download(output_path = path)
+    response = input("\nVideo or audio only? (v/a): \n")
+    if response == "v":
+        yt = YouTube(url, on_progress_callback=on_progress)
+        yd = yt.streams.get_highest_resolution()
+        yd.download(output_path=path)
+    elif response == "a":
+        yt = YouTube(url, on_progress_callback=on_progress)
+        yd = yt.streams.get_audio_only()
+        yd.download(output_path=path)
+    else:
+        print("\nInvalid option. Please enter 'v' for video or 'a' for audio.\n")
 
-def ao():
-	
-	#Filters and download
-	yt.filter(only_audio = True).order_by("bitrate").desc().first().download(output_path = path)
-
-
-#Main loop
-if answer == "1":
-	vo()
-elif answer == "2":
-	ao()
+if __name__ == "__main__":
+    main()
