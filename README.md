@@ -2,7 +2,7 @@
 
 The simple CLI for pytube (now with pytubefix!).
 
-A super simple program to download videos from the command line.
+A simple program to download videos from the command line.
 
 Please feel free to change the attributes guiding yourself with the [PyTube API]
 
