@@ -8,7 +8,7 @@ Feel free to change the attributes guiding yourself with the [PyTube API]
 
 ## Running
 
-AST requires [Python] and [PyTube] to run.
+yt.py requires [Python] and [PyTube] to run.
 
 ```sh
 pip install pytubefix
